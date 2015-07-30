@@ -1,4 +1,4 @@
-# Vehicle Serial Number Lookup -Proof Of Concept
+# Vehicle Serial Number Lookup -POC
 
 Flask is a Python-based micro-framework.  
 AngularJS integration with other python-based micro-framework flask
