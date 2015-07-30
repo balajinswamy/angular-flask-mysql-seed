@@ -46,7 +46,7 @@
     flask/bin/python run.py
 
     service will run at the port no 5000 [http://localhost:5000](http://localhost:5000).
-
+    Also double check config.py has the correct database settings
     
 A client-side AngularJS application will now be available by running
 
