@@ -1,8 +1,5 @@
 # Vehicle Serial Number Lookup -POC
 
-Flask is a Python-based micro-framework.  
-AngularJS integration with other python-based micro-framework flask
-
 ## Installation/Prerequisites
     Install the pre requisites `[Git](http://git-scm.com)`, `[node.js](http://nodejs.org)`, and `[Python 2.7](http://www.python.org/)`.  This applicaction also requires `[MySQL](http://www.mysql.org)`.
 
