@@ -26,7 +26,7 @@
 
 ## Database
     mysql>create database truecar;
-    $>mysql -u username -p password truecar < path-to-application/db.sql
+    $>mysql -u username -p password password < path-to-application/db.sql
 
 
 
