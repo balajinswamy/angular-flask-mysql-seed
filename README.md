@@ -41,7 +41,9 @@ AngularJS integration with other python-based micro-framework flask
     * `grunt dist` to launch a web server on an optimized application
 	
 ## Creating a Flask service
-	A virutal environemt in a new 'flask' directory peer to the root should have already been created 
+    To create a new virtual environment run the install.sh script
+    ./install.sh
+	A virutal environemt in a new 'flask' directory peer to the root should have been created by now 
 
 ## Run the flask service:
     flask/bin/python run.py
