@@ -1,0 +1,54 @@
+<div class="container-fluid" ng-controller="vsnLookupController">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Welcome to Test!</h1>
+            <p class="lead">This is your homepage, ready for some awesomeness!!</p>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div>
+        <form name="form" novalidate>
+
+            <div class="group" show-errors='{showSuccess: true}'>
+                <input vsn-input type="text" class="form-control" name="vsn" ng-maxlength="12" maxlength="12" ng-model="params.vsn" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Enter 12 Digit Vehicle Serial Number</label>
+                <!-- todo: refactor to use ngMessages -->
+            
+                <div ng-if="form.vsn.$dirty">
+                    <p class="help-block" ng-if="form.vsn.$error.required">Vehicle Serial Number is required</p>
+                    <p class="help-block" ng-if="form.vsn.$error.name">Vehicle Serial Number is invalid</p>
+                    <p class="help-block" ng-if="form.vsn.$error.invalidchars">VSN you entered does not meet the pattern requirements. First 6 characters should be alphabets and the next 6 characters should be numbers (ABCDEF123456).</p>
+                    <p class="help-block" ng-if="form.vsn.$error.maxlength">No More Characters allowed</p>
+                    <p class="help-block" ng-if="form.vsn.$error.invalidlength">VSN you entered does not meet the length requirements, should be 12 characters long</p>
+                    <p class="help-block" ng-if="form.vsn.$error.invalidcheckdigit">Check digit does not match</p>
+                    <!-- <p class="help-block" ng-if="params.vsn.length < 12"><span>{{12 - params.vsn.length}} more characters left</span></p> -->
+                </div>
+            </div>
+            <ng-messages ng-if="serverErrors" for="server.errors" class="server-errors">
+                <!-- todo: handle server errors and display appropriate error messages-->
+                <ng-message when="not.found">"No Records Found matching your search criteria"</ng-message>
+            </ng-messages>
+            <br />
+            <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="submit(params)">Get Details</button>
+            <button class="btn btn-link" ng-click="reset()">Reset</button>
+
+        </form>
+    </div>
+
+    <div class="data" ng-if="dataAvailable">
+        <label>Vehicle Trim</label>
+        <input ng-readonly="true" type="text" ng-model="vsnDetails.trim" class="form-control">
+        <label>Year</label>
+        <input ng-readonly="true" type="text" ng-model="vsnDetails.year" class="form-control">
+        <label>Make</label>
+        <input ng-readonly="true" type="text" ng-model="vsnDetails.make" class="form-control">
+        <label>Model</label>
+        <input ng-readonly="true" type="text" ng-model="vsnDetails.model" class="form-control">
+        <label>Trim Name</label>
+        <input ng-readonly="true" type="text" ng-model="vsnDetails.trim_name" class="form-control">
+    </div>
+
+</div>
