@@ -1,7 +1,4 @@
-# angular-flask-mysql-seed
-POC Seed project utilizing AngularJS (NodeJS, Bower, NPM, Grunt, AngularJS, Karma, Jasmine,PhantomJS) and Python (Flask a Micro-framework) and MySQL Database 
-
-# Vehicle Serial Number Lookup -True Car
+# Vehicle Serial Number Lookup -Proof Of Concept
 
 Flask is a Python-based micro-framework.  
 AngularJS integration with other python-based micro-framework flask
