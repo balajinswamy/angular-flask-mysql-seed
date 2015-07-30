@@ -47,6 +47,7 @@ angular.module('truecar')
       this.params = { vsn: null};
       $scope.dataAvailable = false;
       $scope.isBusy = false;
+      $scope.serverErrors = false;
     }
 
     querySuccess = function() {
