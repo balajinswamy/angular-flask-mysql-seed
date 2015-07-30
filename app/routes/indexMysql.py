@@ -15,7 +15,7 @@ def db_connect():
   g.conn = MySQLdb.connect(host=config.host,
                               user=config.user,
                               passwd=config.passwd,
-                              db=config.db)
+                              db=config.database)
   g.cursor = g.conn.cursor()
 
 @app.after_request
@@ -43,15 +43,19 @@ def hello():
   return "This website is all about cars!!!"
 
 
-@app.route("/api/v1/names", methods=['POST','GET'])
+@app.route("/api/v1/vsn", methods=['POST','GET'])
 def names():
   #flask has a shortcut for JSON!!
   _vsn = request.json.get('vsn')
   
   #todo:Based on the description of the problem, we should just be able to query based on the REGEX.  
   #     Are we going to get the close match or an exact match
-  result = query_db("select *, length(vsn) - length(REPLACE(vsn, '*', '')) from vsn_details where vsn REGEXP '[ZZRCAV*]{6}[999451*]{6}'"
-  "order by length(vsn) - length(REPLACE(vsn, '*', ''))")
+  # I bet the position matters, for now skipping the Regex approach.
+  # result = query_db("select *, length(vsn) - length(REPLACE(vsn, '*', '')) from vsn_details where vsn REGEXP '[ZZRCAV*]{6}[999451*]{6}'"
+  # "order by length(vsn) - length(REPLACE(vsn, '*', ''))")
+
+
+  # Approact 2: 
 
   # DELIMITER $$
   # CREATE DEFINER=`root`@`localhost` PROCEDURE `getVSNInfo`(in i_vsn char(12))
@@ -84,7 +88,7 @@ def names():
 @app.route("/add", methods=['POST'])
 def add():
   req_json = request.get_json()
-  g.cursor.execute("INSERT INTO truecar.vsn_details (firstname, lastname) VALUES (%s,%s)", (req_json['firstname'], req_json['lastname']))
+  g.cursor.execute("INSERT INTO truecar.vsn_details (`vsn`, `trim`, `year`, `make`, `model`,`trim_name`) VALUES (%s,%s,%s,%s,%s,%s)", (req_json['vsn'], req_json['trim'],req_json['year'], req_json['make'],req_json['model'], req_json['trim_name']))
   g.conn.commit()
   resp = Response("Updated", status=201, mimetype='application/json')
   return resp
