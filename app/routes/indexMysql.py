@@ -54,7 +54,7 @@ def names():
   "order by length(vsn) - length(REPLACE(vsn, '*', ''))")
 
   # DELIMITER $$
-  # CREATE DEFINER=`root`@`localhost` PROCEDURE `new_procedure`(in i_vsn char(12))
+  # CREATE DEFINER=`root`@`localhost` PROCEDURE `getVSNInfo`(in i_vsn char(12))
   # BEGIN
   #    SELECT vsn, trim, year, make, model, trim_name FROM vsn_details
   #    where SUBSTRING(vsn,1,1) in (SUBSTRING(i_vsn,1,1), '*')
@@ -74,7 +74,7 @@ def names():
   # END $$
   # DELIMITER ;
   if _vsn:
-    result = query_db("CALL new_procedure('{0}')".format(_vsn))
+    result = query_db("CALL getVSNInfo('{0}')".format(_vsn))
     data = json.dumps(result)
     resp = Response(data, status=200, mimetype='application/json')
     return resp
