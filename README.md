@@ -22,7 +22,7 @@ AngularJS integration with other python-based micro-framework flask
 
     Clone the repository from `github`, and `cd` into it:
 
-    git clone https://github.com/balajiswamy/truecar.git && cd $_
+    git clone https://github.com/balajinswamy/angular-flask-mysql-seed.git && cd $_
 
     Run `npm install` to install required node module dependencies
         - npm install
