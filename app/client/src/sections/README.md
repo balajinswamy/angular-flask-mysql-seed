@@ -1,0 +1,1 @@
+Sections are composed of zero or more components.  Within its real estate space will decide where the component(s) will fit in.
