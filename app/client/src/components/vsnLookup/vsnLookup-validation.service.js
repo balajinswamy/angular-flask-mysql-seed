@@ -1,10 +1,11 @@
+// @ngInject
 /*  
   visit http://en.wikipedia.org/wiki/Vehicle_identification_number for more information on Vehicle identification number(VIN)
   We are not using all of the validations for VIN, but just forms the basis for this service.
   Check digit is ignored delibrately as it not applicable for this POC.  Probably in Version 2!!.
 */
-ng.module('truecar').factory('vsnValidationService', function () {
-
+// ng.module('truecar').factory('vsnValidationService', function () {
+function vsnValidationService() {
   var response = {};
   var vsnLength = response.vsnLength = 12;
   var checkDigitIdx = response.checkDigitIndex = 8;
@@ -84,4 +85,5 @@ ng.module('truecar').factory('vsnValidationService', function () {
   response.validate = validate;
 
   return response;
-});
+};
+module.exports = vsnValidationService;

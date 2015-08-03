@@ -1,7 +1,8 @@
 //@ngInject
-angular.module('truecar')
-  .controller('vsnLookupController', ['$scope', 'vsnService', function ($scope, vsnService) {
-    
+// angular.module('truecar')
+//   .controller('vsnLookupController', ['$scope', 'vsnService', function ($scope, vsnService) {
+
+function vsnLookupController($scope, vsnService) {
     var
       querySuccess,
       queryFailure;
@@ -15,10 +16,17 @@ angular.module('truecar')
     $scope.serverErrors = false;
     $scope.dataAvailable = false;
 
+    init = function() {
+      $scope.reset();
+    }
+
     $scope.disabled = function() {
       return $scope.$eval('form.$invalid') || $scope.isBusy === true;
     }
 
+    /*
+      bound to the submit button
+    */
     $scope.submit = function(params) {
 
       if ($scope.disabled()) return;
@@ -28,20 +36,14 @@ angular.module('truecar')
     
       vsnService.query(params).$promise
       .then(
-        function (response) {
-          $scope.dataAvailable = $scope.isBusy = $scope.serverErrors = false;
-          if (!ng.isUndefined(response) && response.length > 0) {
-            $scope.dataAvailable = true;
-            $scope.vsnDetails = response[0];  
-          } else {
-            $scope.serverErrors = true; //!!
-            $scope.server.errors = 'not.found';
-          }
-        },
+        querySuccess,
         queryFailure
       );
     };
     
+    /*
+      bound to the submit button
+    */
     $scope.reset = function() {
       $scope.$broadcast('show-errors-reset');
       this.params = { vsn: null};
@@ -50,9 +52,15 @@ angular.module('truecar')
       $scope.serverErrors = false;
     }
 
-    querySuccess = function() {
-      console.log("resolved to true");
-      $scope.isBusy = false;
+    querySuccess = function(response) {
+      $scope.dataAvailable = $scope.isBusy = $scope.serverErrors = false;
+      if (!ng.isUndefined(response) && response.length > 0) {
+        $scope.dataAvailable = true;
+        $scope.vsnDetails = response[0];  
+      } else {
+        $scope.serverErrors = true; //!!
+        $scope.server.errors = 'not.found';
+      }
     };
     queryFailure = function() {
       //todo: refactor - service to return appropriate error response..
@@ -60,4 +68,6 @@ angular.module('truecar')
       $scope.isBusy = false;
     };
 
-  }]);
+    init();
+  };
+  module.exports = vsnLookupController;
